@@ -69,7 +69,15 @@ the-machine/
    # Edit apps/server/.env with your database credentials
    ```
 
-4. **Set up the database**
+4. **Start PostgreSQL (optional - using Docker)**
+   ```bash
+   # Start PostgreSQL in Docker
+   docker-compose up -d
+   
+   # Or use your own PostgreSQL instance
+   ```
+
+5. **Set up the database (optional)**
    ```bash
    # Run Prisma migrations
    npm run db:migrate -w apps/server
@@ -77,6 +85,12 @@ the-machine/
    # (Optional) Seed the database
    npm run db:seed -w apps/server
    ```
+
+## 📚 Documentation
+
+- **[QUICKSTART.md](QUICKSTART.md)** - Get started quickly
+- **[ARCHITECTURE.md](ARCHITECTURE.md)** - System architecture and design
+- **[CONTRIBUTING.md](CONTRIBUTING.md)** - Contribution guidelines
 
 ## 📦 Available Commands
 
