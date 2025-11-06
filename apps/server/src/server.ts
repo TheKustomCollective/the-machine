@@ -124,8 +124,10 @@ async function buildServer() {
 }
 
 async function start() {
+  let fastify: Awaited<ReturnType<typeof buildServer>> | undefined;
+  
   try {
-    const fastify = await buildServer();
+    fastify = await buildServer();
     
     const port = Number(process.env.PORT) || 3000;
     const host = process.env.HOST || '0.0.0.0';
@@ -140,22 +142,29 @@ async function start() {
 📊 Status: http://localhost:${port}/api/v1/status
 🌍 Environment: ${process.env.NODE_ENV || 'development'}
     `);
+    
+    // Handle graceful shutdown
+    const gracefulShutdown = async (signal: string) => {
+      console.log(`\n⚠️  ${signal} signal received: closing server`);
+      try {
+        if (fastify) {
+          await fastify.close();
+          console.log('✅ Server closed gracefully');
+        }
+        process.exit(0);
+      } catch (err) {
+        console.error('❌ Error during shutdown:', err);
+        process.exit(1);
+      }
+    };
+    
+    process.on('SIGINT', () => gracefulShutdown('SIGINT'));
+    process.on('SIGTERM', () => gracefulShutdown('SIGTERM'));
   } catch (err) {
     console.error('Error starting server:', err);
     process.exit(1);
   }
 }
-
-// Handle graceful shutdown
-process.on('SIGINT', async () => {
-  console.log('\n⚠️  SIGINT signal received: closing server');
-  process.exit(0);
-});
-
-process.on('SIGTERM', async () => {
-  console.log('\n⚠️  SIGTERM signal received: closing server');
-  process.exit(0);
-});
 
 // Start the server
 if (require.main === module) {

@@ -30,7 +30,7 @@
     },
     "extra": {
       "eas": {
-        "projectId": "your-project-id-here"
+        "projectId": "your-eas-project-id-here-after-running-eas-init"
       }
     }
   }
