@@ -61,7 +61,7 @@ async function buildServer() {
 
   // Register CORS
   await fastify.register(cors, {
-    origin: fastify.config.CORS_ORIGIN,
+    origin: process.env.CORS_ORIGIN || '*',
     credentials: true
   });
 
@@ -79,7 +79,7 @@ async function buildServer() {
     return {
       status: 'running',
       version: '0.1.0',
-      environment: fastify.config.NODE_ENV,
+      environment: process.env.NODE_ENV || 'development',
       timestamp: new Date().toISOString()
     };
   });
