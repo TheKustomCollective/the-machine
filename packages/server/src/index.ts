@@ -19,7 +19,11 @@ server.register(cors, {
 });
 
 server.register(jwt, {
-  secret: process.env.JWT_SECRET || 'fallback-secret-key',
+  secret:
+    process.env.JWT_SECRET ||
+    (() => {
+      throw new Error('JWT_SECRET environment variable is required');
+    })(),
 });
 
 // Health check endpoint

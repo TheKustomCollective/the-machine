@@ -1,7 +1,7 @@
 export interface User {
   id: string;
   email: string;
-  createdAt: Date;
+  createdAt: string;
 }
 
 export interface Avatar {
@@ -11,8 +11,8 @@ export interface Avatar {
   description?: string;
   imageUrl?: string;
   previewUrl?: string;
-  createdAt: Date;
-  updatedAt: Date;
+  createdAt: string;
+  updatedAt: string;
 }
 
 export interface AuthTokenPayload {
@@ -25,6 +25,6 @@ export interface JobStatus {
   status: 'pending' | 'processing' | 'completed' | 'failed';
   result?: string;
   error?: string;
-  createdAt: Date;
-  updatedAt: Date;
+  createdAt: string;
+  updatedAt: string;
 }
