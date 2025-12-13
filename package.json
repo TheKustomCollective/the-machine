@@ -1,0 +1,33 @@
+{
+  "name": "the-machine",
+  "version": "0.1.0",
+  "private": true,
+  "description": "AI Social Metaverse - Monorepo",
+  "workspaces": [
+    "apps/*",
+    "packages/*"
+  ],
+  "scripts": {
+    "dev:server": "npm run dev -w apps/server",
+    "dev:mobile": "npm start -w apps/mobile",
+    "build": "npm run build -w apps/server",
+    "build:server": "npm run build -w apps/server",
+    "clean": "rm -rf node_modules apps/*/node_modules packages/*/node_modules",
+    "lint": "echo 'Linting all packages...'",
+    "test": "echo 'Running tests...'"
+  },
+  "keywords": [
+    "ai",
+    "social",
+    "metaverse",
+    "react-native",
+    "fastify",
+    "typescript"
+  ],
+  "author": "The Kustom Collective",
+  "license": "MIT",
+  "engines": {
+    "node": ">=18.0.0",
+    "npm": ">=9.0.0"
+  }
+}
